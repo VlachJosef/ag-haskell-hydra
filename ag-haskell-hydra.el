@@ -138,7 +138,9 @@ Search for _d_ data _n_ newtype _f_ function _c_ class _t_ type _s_ switch _p_ c
 (defmacro ahh:in-haskell-mode-minibuffer (&rest body)
   `(when (and
           (with-current-buffer (window-buffer (minibuffer-selected-window))
-            (derived-mode-p 'haskell-mode))
+            (or
+             (derived-mode-p 'haskell-mode)
+             (derived-mode-p 'simple-ghci-mode)))
           (string-match ahh:ag-prompt-regexp (minibuffer-prompt)))
      ,@body))
 
